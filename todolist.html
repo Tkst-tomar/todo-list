@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List using Java Script</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        *{font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;}
+        #list-display{background-image: url(todoback.jpg); text-align: center;padding: 20px 0px;margin: 100px auto;height: 800px;width: 600px;background-size: contain;background-repeat: no-repeat;position: relative;}
+        .box{position: absolute;top: 5%;left: 15%;}
+        h2{color: black;}
+        ul{list-style-type: none;padding-bottom: 20px;padding-left: 5px;}
+        #lst{display: flex;justify-content: space-between; width: 180px;margin: 10px 0px;padding: 5px;padding-left: 15px; background-color: #2D46B9;color: white;border-radius: 50px;}
+       
+        li span{margin: auto 20px;cursor: pointer;}
+        button{cursor: pointer;}
+       
+    </style>
+</head>
+<body>
+    
+    <div id="list-display">
+        <div class="box">
+
+            <h2>To Do List</h2>
+            <input type="text" id="inp" placeholder="Enter the item"> <button id="add" onclick="add_to_list() ">+</button>
+            <ul id="list">
+                
+            </ul>
+            
+        </div>
+    </div>
+    <script>
+        var list = [];
+        var item = "";
+        function add_to_list(){
+            var index = list.length
+            list[index] = document.getElementById("inp").value;
+            item+= "<li id='lst'>"+list[index]+" <span id='btn' onclick='delete_item(this.parentElement.innerText)'><i class='far fa-trash-alt'></i></span></li>";
+            document.getElementById("list").innerHTML = item;
+            document.getElementById("lst").style.left = "0%"
+        }
+        function delete_item(value){
+         var y = value
+            var data = []
+            let b=0;
+            var removed_item = []
+            for(a=0;a<list.length;a++)
+            {
+                if(list[a]!=y)
+                {
+                    data[b] = list[a]
+                    b++;
+                }
+                else{
+                    removed_item[removed_item.length]=list[a]
+                }
+            }
+            item = "";
+            for(a=0;a<data.length;a++)
+            {
+                list[a]=data[a]
+            }
+            list.pop()
+            for(i=0;i<list.length;i++)
+            {
+                item+="<li>"+list[i]+" <span id='btn' onclick='delete_item(this.parentElement.innerText)'><i class='far fa-trash-alt'></i></span></li>";
+            }
+            document.getElementById("list").innerHTML = item;
+
+        }
+        
+        
+        
+        
+     
+    </script>
+</body>
+</html>
